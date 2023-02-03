@@ -4,8 +4,9 @@
 
 #include "bot.hpp"
 #include "bots/always_rock.hpp"
-#include "bots/beat_last.hpp"
 #include "bots/frequentist.hpp"
+#include "bots/beat_last.hpp"
+
 #include "move.hpp"
 
 /// Returns (draws, player 1 wins, player 2 wins)
@@ -36,12 +37,9 @@ auto main() -> int {
     bots.push_back(std::make_unique<Frequentist>());
     bots.push_back(std::make_unique<BeatLast>());
 
-    // std::vector<std::unique_ptr<Bot>> bots = {std::make_unique<AlwaysRock>(),
-    //                                           std::make_unique<Frequentist>()};
-
     for (size_t i = 0; i < bots.size(); i++) {
         for (size_t j = i + 1; j < bots.size(); j++) {
-            std::array<uint32_t, 3> scores = play_match(*bots[i], *bots[j], 10);
+            std::array<uint32_t, 3> scores = play_match(*bots[i], *bots[j], 1000);
             std::cout << bots[i]->name() << " vs " << bots[j]->name() << ": " << scores[0]
                       << " draws, " << scores[1] << " wins, " << scores[2] << " losses\n";
         }
