@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 3.25.0)
+include(FetchContent)
 project(rpsbot)
 set(CMAKE_CXX_STANDARD 20)
 
@@ -22,3 +23,11 @@ target_include_directories(
     PRIVATE 
     ${PROJECT_SOURCE_DIR}/src
 )
+
+FetchContent_Declare(fmt
+  GIT_REPOSITORY https://github.com/fmtlib/fmt.git
+  GIT_TAG master
+)
+FetchContent_MakeAvailable(fmt)
+
+target_link_libraries(${PROJECT_NAME} PRIVATE fmt)
